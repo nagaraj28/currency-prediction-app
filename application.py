@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify
 import pickle
 from flask_cors import CORS
 
-app = Flask(__name__)
-CORS(app)
+application = Flask(__name__)
+CORS(application)
 
 
 # Define a function to load a trained model for a given currency
@@ -12,7 +12,7 @@ def load_model(currency):
     return model
 
 # Define a predict function for the API
-@app.route('/predict', methods=['POST'])
+@application.route('/predict', methods=['POST'])
 def predict():
     # # Get the currency code and input data from the request
     # currency = request.form['currency']
@@ -31,7 +31,7 @@ def predict():
     print(prediction)
     # Return the prediction as a JSON response
     return jsonify({'predicted_close_rate': prediction})
-@app.route('/predictall', methods=['POST'])
+@application.route('/predictall', methods=['POST'])
 def predictall():
     # # Get the currency code and input data from the request
     # currency = request.form['currency']
@@ -55,4 +55,4 @@ def predictall():
     return jsonify({'predicted_close_rate': resultPredict})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
